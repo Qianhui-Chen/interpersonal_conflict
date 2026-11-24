@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Chatti 合作对话实验</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <section id="login-view" class="login-view" aria-labelledby="login-title">
+        <div class="login-card">
+          <p class="eyebrow">CONVERSATION STUDY</p>
+          <h1 id="login-title">请输入问卷中生成的随机数</h1>
+          <form id="login-form" novalidate>
+            <label for="password-input">问卷中生成的随机数</label>
+            <div class="login-row">
+              <input
+                id="password-input"
+                name="password"
+                type="password"
+                inputmode="numeric"
+                autocomplete="off"
+                maxlength="1"
+                required
+              />
+              <button type="submit">进入对话</button>
+            </div>
+            <p id="login-error" class="form-error" role="alert"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="experiment-view" class="experiment-view is-hidden" aria-label="对话实验">
+        <div class="round-bar" aria-live="polite">
+          <span id="round-current">第 1 轮，共 6 轮</span>
+          <span id="round-remaining">完成本轮后还剩 5 轮</span>
+        </div>
+
+        <div id="chat-shell" class="chat-shell is-empty">
+          <div id="starter" class="starter">
+            <div class="starter-icon" aria-hidden="true">C</div>
+            <h1>请针对你亲身经历且尚未解决的现实合作冲突，与 AI 展开讨论。</h1>
+          </div>
+
+          <div id="messages" class="messages" aria-live="polite" aria-label="聊天记录"></div>
+
+          <p id="countdown-status" class="chat-end is-hidden" role="status" aria-atomic="true">
+            实验将在 <strong id="countdown-number">2</strong> 秒后结束。
+          </p>
+
+          <section id="completion-panel" class="chat-end is-hidden" aria-labelledby="completion-title">
+            <h2 id="completion-title" tabindex="-1">实验结束</h2>
+            <p>请复制以下聊天机器人代码，并粘贴到问卷中。</p>
+            <button id="copy-code" class="code-button" type="button">
+              <span id="completion-code"></span>
+              <span class="copy-label">点击复制</span>
+            </button>
+            <p id="copy-status" class="copy-status" aria-live="polite"></p>
+          </section>
+
+          <form id="chat-form" class="composer">
+            <label class="sr-only" for="chat-input">输入你的回答</label>
+            <textarea
+              id="chat-input"
+              rows="1"
+              maxlength="2000"
+              placeholder="请说说你的经历……"
+              required
+            ></textarea>
+            <button id="send-button" type="submit" aria-label="发送消息">
+              <span aria-hidden="true">↑</span>
+            </button>
+          </form>
+          <p id="chat-error" class="chat-error" role="alert"></p>
+        </div>
+      </section>
+    </main>
+
+    <template id="message-template">
+      <article class="message-row">
+        <div class="message-avatar" aria-hidden="true"></div>
+        <div class="message-content"></div>
+      </article>
+    </template>
+
+    <script src="/config.js"></script>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
